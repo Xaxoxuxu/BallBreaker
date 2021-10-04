@@ -35,11 +35,11 @@ public class BallBreaker extends ApplicationAdapter
         paddle = new Paddle(Gdx.graphics.getWidth() / 2, 30, 200, 20);
 
         blocks = new Array<>();
-        final int blockWidth = 63;
-        final int blockHeight = 20;
-        for (int y = Gdx.graphics.getHeight() / 2; y < Gdx.graphics.getHeight(); y+= blockHeight + 10)
+        final int blockWidth = Gdx.graphics.getWidth() / 18;
+        final int blockHeight = Gdx.graphics.getHeight() / 50;
+        for (int y = Gdx.graphics.getHeight() / 2 + blockHeight * 2; y < Gdx.graphics.getHeight() - blockHeight * 3; y += blockHeight + 10)
         {
-            for (int x = 10; x < Gdx.graphics.getWidth(); x += blockWidth + 10)
+            for (int x = blockWidth; x < Gdx.graphics.getWidth() - blockWidth; x += blockWidth + 10)
             {
                 blocks.add(new Block(x, y, blockWidth, blockHeight));
             }
@@ -58,11 +58,11 @@ public class BallBreaker extends ApplicationAdapter
         blocks.forEach(b -> ball.checkCollision(b));
         for (int i = 0; i < blocks.size; i++)
         {
-           if (blocks.get(i).isDestroyed())
-           {
-               blocks.removeIndex(i);
-               i--;
-           }
+            if (blocks.get(i).isDestroyed())
+            {
+                blocks.removeIndex(i);
+                i--;
+            }
         }
         paddle.update();
 
